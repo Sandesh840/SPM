@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>LinkedIn Colleague Search</title>
+  <style type="text/css" media="screen">
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, font, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      font-weight: inherit;
+      font-style: inherit;
+      font-size: 100%;
+      font-family: inherit;
+      vertical-align: baseline;
+    }
+    
+    /* remember to define focus styles! */
+    :focus {
+      outline: 0;
+    }
+    body {
+      line-height: 1;
+      color: black;
+      background: white;
+    }
+    ol, ul {
+      list-style: none;
+    }
+    /* tables still need 'cellspacing="0"' in the markup */
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    caption, th, td {
+      text-align: left;
+      font-weight: normal;
+    }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+      content: "";
+    }
+    blockquote, q {
+      quotes: "" "";
+    }
+  </style>
+  <style type="text/css" media="screen">
+    #body {
+      margin: 0 auto;
+    }
+    
+    .wrapper {
+      background-color: white;
+      padding: 20px;
+      width: 252px;
+      -moz-box-shadow: 0 0 10px 4px #888;
+    }
+    
+    .title {
+      font-weight: bold;
+      font-size: 1.2em;
+      height: 30px;
+    }
+    
+    .inputs {
+      height: 30px;
+      width: 252px;
+      padding-bottom: 10px;
+    }
+    
+    #keywords {
+      border: 1px solid #ccc;
+      padding: 3px 5px 1px;
+      width: 217px;
+      height: 17px;
+      -moz-border-radius: 3px 0px 0px 3px;
+    }
+    
+    #search {
+      -moz-border-radius: 0px 3px 3px 0px;
+      background: url("http://static02.linkedin.com/scds/common/u/img/sprite/sprite_global_v5.png") no-repeat scroll -9px -1199px #0076A8;
+      border: 1px solid #06598B;
+      color: #0076A8;
+      cursor: pointer;
+      height: 23px;
+      width: 19px;
+      text-indent: -9999px;
+      left: -4px;
+      position: relative;
+    }
+    
+    ul.user-list {
+      list-style: none;
+      width: 252px;
+    }
+    
+    li.user {
+      float: left;
+      height: 61px;
+      width: 61px;
+      position: relative;
+      margin-right: 2px;
+      margin-bottom: 2px;
+    }
+    
+    .user.first {
+      clear: left;
+    }
+    
+    .profile-photo {
+      height: 61px;
+      width: 61px;
+      background-color: #AAA;
+      cursor: pointer;
+    }
+    
+    .profile-info {
+      display: none;
+      position: absolute;
+      height: 87px;
+      width: 248px;
+      z-index: 20;
+      background-color: #FFF;
+      -moz-box-shadow: 0 0 10px 4px #888;
+      -webkit-box-shadow: 0 0 10px 4px#888;
+      box-shadow: 0 0 10px 4px #888;
+    }
+    
+    .bottom {
+      bottom: -90px;
+    }
+    
+    .top {
+      bottom: 64px;
+    }
+    
+    .col-1 {
+      left: 0px;
+    }
+    
+    .col-2 {
+      left: -63px;
+    }
+   
+    .col-3 {
+      left: -126px;
+    }
+    
+    .col-4 {
+      left: -189px;
+    }
+    
+    .profile-info .content {
+      position: relative;
+      margin: 10px;
+    }
+    
+    .profile-info .close {
+      background: url("http://static02.linkedin.com/scds/common/u/img/sprite/sprite_global_v5.png") no-repeat scroll 100% -1496px transparent;
+      display: block;
+      height: 14px;
+      text-indent: -12345px;
+      width: 14px;
+      float: right;
+    }
+    
+    .name {
+      color: #006699;
+      font-size: 120%;
+      text-decoration: none;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    
+    .headline {
+      font-size: 90%;
+      font-weight: bold;
+      margin-top: 3px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    
+    .location {
+      color: #999999;
+      font-size: 90%;
+      margin-top: 3px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    
+    .action {
+      text-decoration: none;
+      font-size: 90%;
+      color: green;
+    }
+   
+     
+    .top .notch {
+      background: url("notch_sprite.png") no-repeat scroll 0px -12px transparent; 
+      height: 12px;
+      width: 20px;
+      position: absolute;
+      bottom: 0px;  
+      top: 87px;
+    }
+    
+    .bottom .notch {
+      background: url("notch_sprite.png") no-repeat scroll 0px 0px transparent; 
+      height: 12px;
+      width: 20px;
+      position: absolute;
+      top: -11px;
+    }
+    
+    
+    .col-1 .notch {
+      left: 17px;
+    }
+    
+    .col-2 .notch {
+      left: 80px;
+    }
+    
+    .col-3 .notch {
+      left: 143px;
+    }
+    
+    .col-4 .notch {
+      left: 206px;  
+    }
+    
+  </style>
+  <script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="https://github.com/janl/mustache.js/raw/master/mustache.js"></script>
+  <script type="text/javascript">
+  // WARNING: If your XDRPC is on same host, you MUST adjust document.domain to the lowest common denominator
+  document.domain = "linkedin.biz";
+  </script>
+</head>
+<body style="background: #ccc">
+  
+  <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+    api_key: gHoGjcBjHOisdh4F7u7c6_qRhLFowv7CIcSN1VOr8yP4EUyTAwxYD6KIOIi4rvei
+    authorize: true
+    extensions: SearchCompany@http://szhang-mn.linkedin.biz/~szhang/search2/searchcompany.js
+  </script>
+  
+  <div id="body">
+    <div class="wrapper">
+      <div class="title">Find your colleagues</div>
+      <div class="inputs">
+        <input id="keywords" type="text" placeholder="search any keywords" name="keywords"></input>
+        <input id="search" type="submit" value="Search" name="search"></input>
+      </div>
+      <script type="IN/SearchCompany" data-id="1337"></script>
+    </div>
+  </div>
+</body>
+</html>
